@@ -15,45 +15,31 @@ def main():
         return
 
     def col(name):
-        return [float(r[name]) for r in rows]
+        return [float(r[name]) for r in rows if r.get(name) not in (None, "", "NA")]
 
+    # Prefer new column
     obj = col("objective")
+    if not obj:
+        print("No 'objective' column found with numeric data.")
+        return
+
     L = col("tip_length_mm")
     R = col("tip_radius_mm")
     t = col("wall_thickness_mm")
     d = col("inner_depth_mm")
 
-    # Scatter: objective vs radius
-    plt.figure()
-    plt.scatter(R, obj)
-    plt.xlabel("tip_radius_mm")
-    plt.ylabel("objective")
-    plt.title("Objective vs Tip Radius")
-    plt.savefig(OUTDIR / "objective_vs_radius.png", dpi=200)
+    def save_scatter(x, y, xlabel, title, filename):
+        plt.figure()
+        plt.scatter(x, y)
+        plt.xlabel(xlabel)
+        plt.ylabel("objective")
+        plt.title(title)
+        plt.savefig(OUTDIR / filename, dpi=200)
 
-    # Scatter: objective vs thickness
-    plt.figure()
-    plt.scatter(t, obj)
-    plt.xlabel("wall_thickness_mm")
-    plt.ylabel("objective")
-    plt.title("Objective vs Wall Thickness")
-    plt.savefig(OUTDIR / "objective_vs_thickness.png", dpi=200)
-
-    # Scatter: objective vs (length)
-    plt.figure()
-    plt.scatter(L, obj)
-    plt.xlabel("tip_length_mm")
-    plt.ylabel("objective")
-    plt.title("Objective vs Tip Length")
-    plt.savefig(OUTDIR / "objective_vs_length.png", dpi=200)
-
-    # Scatter: objective vs inner_depth
-    plt.figure()
-    plt.scatter(d, obj)
-    plt.xlabel("inner_depth_mm")
-    plt.ylabel("objective")
-    plt.title("Objective vs Inner Depth")
-    plt.savefig(OUTDIR / "objective_vs_inner_depth.png", dpi=200)
+    save_scatter(R, obj, "tip_radius_mm", "Objective vs Tip Radius", "objective_vs_radius.png")
+    save_scatter(t, obj, "wall_thickness_mm", "Objective vs Wall Thickness", "objective_vs_thickness.png")
+    save_scatter(L, obj, "tip_length_mm", "Objective vs Tip Length", "objective_vs_length.png")
+    save_scatter(d, obj, "inner_depth_mm", "Objective vs Inner Depth", "objective_vs_inner_depth.png")
 
     print("Saved plots to:", OUTDIR)
 
