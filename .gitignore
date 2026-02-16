@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Results (large auto-generated data)
+results/runs/
+results/plots/
+results/database.csv
+pipeline/_tmp_params.json
+
+# STL generated files
+geometry/generated_stl/
+
+# OS
+.DS_Store

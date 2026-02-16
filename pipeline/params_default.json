@@ -1,0 +1,14 @@
+{
+  "shape_family": "cone_hollow",
+  "tip_length_mm": 10.0,
+  "tip_radius_mm": 3.0,
+  "wall_thickness_mm": 0.5,
+  "inner_depth_mm": 8.0,
+
+  "coil_frequency_khz": 40.0,
+  "coil_current_A": 150.0,
+
+  "mesh_quality": {
+    "stl_fn": 100
+  }
+}
