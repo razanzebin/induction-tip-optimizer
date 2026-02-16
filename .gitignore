@@ -2,14 +2,14 @@
 __pycache__/
 *.pyc
 
-# Results (large auto-generated data)
+# Auto-generated results
 results/runs/
 results/plots/
 results/database.csv
 pipeline/_tmp_params.json
 
-# STL generated files
+# Auto-generated geometry
 geometry/generated_stl/
 
-# OS
+# OS junk
 .DS_Store
